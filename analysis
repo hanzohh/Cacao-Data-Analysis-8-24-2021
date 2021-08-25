@@ -1,0 +1,52 @@
+---
+title: "Flavor of Cacao Analysis"
+author: "Hanson"
+date: "8/24/2021"
+output: html_document
+---
+
+```{r}
+
+
+#Questions
+
+#1) What cacao origin provides the best 
+
+library(tidyverse)
+
+cacao <-read_csv("C:\\Users\\Hoh\\OneDrive - Mercury Insurance\\Documents\\R\\pactice datasets\\flavors_of_cacao.csv")
+
+str(cacao)
+
+```
+
+```{r}
+
+#change the column names to make it simpler for data coding in R
+
+colnames(cacao) <- c("company", "bean_origin", "ref", "review_date", "cocoa_percent", "company_location",
+                                "rating", "bean_type", "broad_bean_origin")
+cacao %>% 
+  summarise()
+
+#Now we have a better column names for the data and we can easily use the simplified column names to due surface level analysis
+
+
+
+
+```
+
+
+
+```{r}
+
+
+
+
+```
+
+```{r}
+
+
+
+```
