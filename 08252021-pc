@@ -1,0 +1,65 @@
+---
+title: "Cacao Data Analysis 8/24/21"
+author: "Hanson Oh"
+date: "8/25/2021"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+
+#Questions
+
+#1) What cacao origin provides the best 
+
+library(tidyverse)
+
+cacao <-read_csv("flavors_of_cacao.csv")
+
+str(cacao)
+
+```
+
+```{r}
+
+#change the column names to make it simpler for data coding in R
+
+colnames(cacao) <- c("company", "bean_origin", "ref", "review_date", "cocoa_percent", "company_location",
+                     "rating", "bean_type", "broad_bean_origin")
+cacao
+
+#Now we have a better column names for the data and we can easily use the simplified column names to due surface level analysis
+
+#how does the data distribution look like? What is unique/what is being recorded per country (ie. U.S.A.)
+cacao %>% 
+  filter(company_location == "U.S.A.")
+
+```
+```{r}
+
+#Which country produces the most chocolate?
+
+cacao %>% 
+  count(company_location) %>% 
+  arrange(desc(n)) %>% 
+  mutate(cacao_share = n / sum(n))
+
+#Now we see that America produces an approx. of 43% of all cacao recorded 
+#France produces 8.7% of the world's recorded cacao, which is the second highest
+#Canada produces approx. 7% of world's recorded cacao
+#UK is next with 5.3%
+#Italy produces 3.5%
+
+
+
+#this is a data visualization of the world's cacao producers, where USA has, by far, 
+cacao %>% 
+  count(company_location) %>% 
+  ggplot(aes(x = company_location, y = n)) +
+  geom_col()+
+  theme(axis.text.x = element_text(angle = 90))
+  
+  
+```
+
