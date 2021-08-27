@@ -58,8 +58,28 @@ cacao %>%
   count(company_location) %>% 
   ggplot(aes(x = company_location, y = n)) +
   geom_col()+
-  theme(axis.text.x = element_text(angle = 90))
-  
-  
+  theme(axis.text.x = element_text(angle = 90, hjust = 0))
+   
 ```
 
+
+
+```{r}
+
+cacao %>%
+  group_by(company, rating) %>% 
+  summarize(bean_num = n()) %>% 
+  mutate(total_ratings = sum(bean_num)) %>% 
+  ungroup() %>% 
+  mutate(word_rating = ifelse(rating <= 3, "Bad", ifelse(rating <= 3.5, "Decent",ifelse(rating <=4, "Good", ifelse(rating<=5, "Best"))))) %>% 
+  filter(word_rating == "Best")
+  
+
+#cacao %>% 
+  #filter(company == "A. Morin", rating == 2.75)
+
+cacao %>% 
+  filter(company == "Amedei" ) %>% 
+  arrange(desc(rating))
+  
+```
